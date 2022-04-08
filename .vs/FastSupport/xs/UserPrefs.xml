@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{EA28710B-872C-49E5-8802-0EF3F787CB10}|Default">
+  <MonoDevelop.Ide.ItemProperties.FastSupport PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupport/Startup.cs">
+    <Files>
+      <File FileName="FastSupport/Program.cs" Line="1" Column="1" />
+      <File FileName="FastSupport/Startup.cs" Line="10" Column="25" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FastSupport" expanded="True">
+            <Node name="FastSupport" expanded="True">
+              <Node name="ConnectedServicesFolder" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
