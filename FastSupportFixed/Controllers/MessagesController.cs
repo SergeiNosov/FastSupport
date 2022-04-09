@@ -9,26 +9,32 @@ using FastSupportFixed.Models;
 
 namespace FastSupportFixed.Controllers
 {
-    public class HomeController : Controller
+    public class MessagesController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<MessagesController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public MessagesController(ILogger<MessagesController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+
+        /*public Dictionary<int, string> GetLastMessages(string token)
+        {
+            return new Dictionary<int, string>()
+            {
+                { 1, "Hello!"},
+                { 1, "Where are my money!!!"},
+                { 0, "Stop! Wait please 5 minutes!"}
+            };
+        }*/
+
+
+        [Route("[controller]/Message")]
+        public IActionResult Message()
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

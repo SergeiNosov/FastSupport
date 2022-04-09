@@ -7,13 +7,13 @@
   <ItemGroup>
     <None Remove="bootstrap" />
     <None Remove="CSS\" />
-    <None Remove="CSS\Message\" />
+    <None Remove="Views\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CSS\" />
-    <Folder Include="CSS\Message\" />
+    <Folder Include="Views\Messages\" />
   </ItemGroup>
 </Project>

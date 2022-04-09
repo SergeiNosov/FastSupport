@@ -22,7 +22,6 @@
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.TagHelpers.output.cache
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.RazorCoreGenerate.cache
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
-/Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Home/Message.cshtml.g.cs
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Home/Privacy.cshtml.g.cs
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Shared/Error.cshtml.g.cs
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs
@@ -37,3 +36,4 @@
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.pdb
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.genruntimeconfig.cache
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.csproj.CopyComplete
+/Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Messages/Message.cshtml.g.cs
