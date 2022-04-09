@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "dU+/Y5pJ5nxKPXOFhIkluby0jwLlt5jOodHLzl86fz4gRzsZMA882olWgLiFSqcZCOS6lJ8ZkXod4BN2FFCcqA==",
+  "success": true,
+  "projectFilePath": "/Users/user/FastSupport/FastSupportFixed/FastSupportFixed.csproj",
+  "expectedPackageFiles": [
+    "/Users/user/.nuget/packages/bootstrap/5.1.3/bootstrap.5.1.3.nupkg.sha512"
+  ],
+  "logs": []
+}
