@@ -1,31 +1,27 @@
 ﻿<Properties StartupConfiguration="{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/Views/Messages/Message.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/StaticData/StaticData.cs">
     <Files>
-      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="25" Column="1" />
+      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="6" Column="32" />
       <File FileName="FastSupportFixed/Views/Home/Index.cshtml" Line="1" Column="1" />
-      <File FileName="FastSupportFixed/Program.cs" />
-      <File FileName="FastSupportFixed/Startup.cs" />
-      <File FileName="FastSupportFixed/Properties/launchSettings.json" />
-      <File FileName="FastSupportFixed/appsettings.json" />
-      <File FileName="FastSupportFixed/Views/Messages/Message.cshtml" Line="13" Column="28" />
+      <File FileName="FastSupportFixed/Program.cs" Line="1" Column="1" />
+      <File FileName="FastSupportFixed/Startup.cs" Line="1" Column="1" />
+      <File FileName="FastSupportFixed/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="FastSupportFixed/appsettings.json" Line="3" Column="48" />
+      <File FileName="FastSupportFixed/Views/Messages/Message.cshtml" Line="51" Column="84" />
+      <File FileName="FastSupportFixed/Controllers/MessagesController.cs" Line="50" Column="13" />
+      <File FileName="FastSupportFixed/CSS/messages.css" Line="110" Column="1" />
+      <File FileName="../Library/Caches/VisualStudio/8.0/Symbols/mysql-net/MySqlConnector/d1507f03a01f6642fbcf5f03e1723e56813cec51/src/MySqlConnector/MySqlConnection.cs" Line="373" Column="1" />
+      <File FileName="FastSupportFixed/DataAnalysis/DataAnalyzer.cs" Line="8" Column="50" />
+      <File FileName="FastSupportFixed/StaticData/StaticData.cs" Line="4" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="FastSupportFixed" expanded="True">
             <Node name="FastSupportFixed" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Messages" expanded="True">
-                  <Node name="Message.cshtml" selected="True" />
-                </Node>
-                <Node name="Shared" expanded="True" />
+              <Node name="StaticData" expanded="True">
+                <Node name="StaticData.cs" selected="True" />
               </Node>
-              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -35,6 +31,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.FastSupportFixed PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Debugger.DebugSourceFolders>
+    <String>/Users/user/Library/Caches/VisualStudio/8.0/Symbols/mysql-net/MySqlConnector/d1507f03a01f6642fbcf5f03e1723e56813cec51</String>
+  </Debugger.DebugSourceFolders>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

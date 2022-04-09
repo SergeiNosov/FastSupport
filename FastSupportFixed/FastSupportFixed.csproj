@@ -8,12 +8,18 @@
     <None Remove="bootstrap" />
     <None Remove="CSS\" />
     <None Remove="Views\Messages\" />
+    <None Remove="MySqlConnector" />
+    <None Remove="DataAnalysis\" />
+    <None Remove="StaticData\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
+    <PackageReference Include="MySqlConnector" Version="2.1.8" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CSS\" />
     <Folder Include="Views\Messages\" />
+    <Folder Include="DataAnalysis\" />
+    <Folder Include="StaticData\" />
   </ItemGroup>
 </Project>
