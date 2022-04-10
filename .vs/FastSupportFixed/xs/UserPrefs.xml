@@ -3,8 +3,8 @@
     <Files>
       <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="21" Column="1" />
       <File FileName="FastSupportFixed/Views/Home/Index.cshtml" />
-      <File FileName="FastSupportFixed/Program.cs" Line="28" Column="1" />
-      <File FileName="FastSupportFixed/Startup.cs" />
+      <File FileName="FastSupportFixed/Program.cs" Line="58" Column="27" />
+      <File FileName="FastSupportFixed/Startup.cs" Line="12" Column="27" />
       <File FileName="FastSupportFixed/Properties/launchSettings.json" />
       <File FileName="FastSupportFixed/appsettings.json" />
       <File FileName="FastSupportFixed/Views/Messages/Message.cshtml" />
@@ -15,12 +15,15 @@
       <File FileName="FastSupportFixed/DataAnalysis/DataAnalyzer.cs" />
       <File FileName="FastSupportFixed/StaticData/StaticData.cs" />
       <File FileName="../Downloads/PullentiCSharp/Pullenti/Sdk.cs" />
+      <File FileName="../MlServer/Server2/sentiment labelled sentences/SentimentModel/Program.cs" Line="13" Column="23" />
+      <File FileName="FastSupportFixed/DataModels/SentimentModel.cs" Line="73" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="FastSupportFixed" expanded="True">
             <Node name="FastSupportFixed" expanded="True">
+              <Node name="DataModels" expanded="True" />
               <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
@@ -32,6 +35,7 @@
   <DisabledProjects>
     <String>../Downloads/PullentiCSharp 2/Demo/Demo.Net.csproj</String>
     <String>../Downloads/PullentiCSharp/Pullenti/Pullenti.Net.csproj</String>
+    <String>../MlServer/Server2/sentiment labelled sentences/SentimentModel/SentimentModel.ConsoleApp.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.ItemProperties.FastSupportFixed PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

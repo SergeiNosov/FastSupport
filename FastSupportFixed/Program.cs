@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using FastSupportFixed.DataModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
 
 namespace FastSupportFixed
 {
@@ -51,6 +53,27 @@ namespace FastSupportFixed
                     }
                 }
             }
+
+
+            // Create single instance of sample data from first line of dataset for model input
+            SentimentModel.ModelInput sampleData = new SentimentModel.ModelInput()
+            {
+                Col0 = @"Здравствуйте. Меня вчера не приняли в отделении Сочи, хочу пожаловаться на врача, который оскоробительно общался со мной!"
+            };
+
+            // Make a single prediction on the sample data and print results
+            var predictionResult = SentimentModel.Predict(sampleData);
+
+            Console.WriteLine("Using model to make single prediction -- Comparing actual Col1 with predicted Col1 from sample data...\n\n");
+
+
+            Console.WriteLine($"Selected: {sampleData.Col0}");
+
+
+            Console.WriteLine($"\n\nPredicted Col1: {predictionResult.PredictedLabel}\n\n");
+            Console.WriteLine("=============== End of process, hit any key to finish ===============");
+
+
 
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");
             CreateHostBuilder(args).Build().Run();

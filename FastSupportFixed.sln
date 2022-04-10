@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.810.21
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastSupportFixed", "FastSupportFixed\FastSupportFixed.csproj", "{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pullenti.Net", "..\Downloads\PullentiCSharp\Pullenti\Pullenti.Net.csproj", "{1BB3B4DC-A838-45DC-B924-5BADF7D64465}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Pullenti.Net", "..\Downloads\PullentiCSharp\Pullenti\Pullenti.Net.csproj", "{B1873B77-17F8-4DD9-BE16-DAF3B25725F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Net", "..\Downloads\PullentiCSharp 2\Demo\Demo.Net.csproj", "{622B263F-628D-4854-A61B-7832F4AE895A}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Demo.Net", "..\Downloads\PullentiCSharp 2\Demo\Demo.Net.csproj", "{6EC19E68-BE27-4055-9B71-D9C90A4742E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SentimentModel.ConsoleApp", "..\MlServer\Server2\sentiment labelled sentences\SentimentModel\SentimentModel.ConsoleApp.csproj", "{183F2934-0B61-4516-B155-FA9D85DC7A0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Release|Any CPU.Build.0 = Release|Any CPU
-		{622B263F-628D-4854-A61B-7832F4AE895A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{622B263F-628D-4854-A61B-7832F4AE895A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{622B263F-628D-4854-A61B-7832F4AE895A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{622B263F-628D-4854-A61B-7832F4AE895A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1873B77-17F8-4DD9-BE16-DAF3B25725F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1873B77-17F8-4DD9-BE16-DAF3B25725F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1873B77-17F8-4DD9-BE16-DAF3B25725F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1873B77-17F8-4DD9-BE16-DAF3B25725F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EC19E68-BE27-4055-9B71-D9C90A4742E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EC19E68-BE27-4055-9B71-D9C90A4742E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EC19E68-BE27-4055-9B71-D9C90A4742E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EC19E68-BE27-4055-9B71-D9C90A4742E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183F2934-0B61-4516-B155-FA9D85DC7A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183F2934-0B61-4516-B155-FA9D85DC7A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183F2934-0B61-4516-B155-FA9D85DC7A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183F2934-0B61-4516-B155-FA9D85DC7A0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
