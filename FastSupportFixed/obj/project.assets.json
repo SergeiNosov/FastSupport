@@ -6067,7 +6067,7 @@
       "outputPath": "/Users/user/FastSupport/FastSupportFixed/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/user/.config/NuGet/NuGet.Config"
+        "/Users/user/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

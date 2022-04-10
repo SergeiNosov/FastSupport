@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MySqlConnector;
+using Newtonsoft.Json;
 
 namespace FastSupportFixed.Controllers
 {
@@ -35,7 +36,7 @@ namespace FastSupportFixed.Controllers
             //Костыль.
 
             Dictionary<string, int> popularedCases = new Dictionary<string, int>();
-            List<string> requests = new List<string>();
+            Dictionary<string, Dictionary<string, object>> requests = new Dictionary<string, Dictionary<string, object>>();
 
             using (MySqlConnection conn = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
@@ -44,26 +45,49 @@ namespace FastSupportFixed.Controllers
 
                 MySqlCommand cmd = new MySqlCommand($"SELECT * FROM UserRequests", conn);
 
-                
+
+                int counts = 0;
+
+                int negativesCount = 0;
+                int normalCounts = 0;
 
                 using (var reader = cmd.ExecuteReader())
                 {
 
                     while (reader.Read())
                     {
-
+                        requests[$"val{counts}"] = new Dictionary<string, object>();
                         if (reader["ShortDescription"] != null && reader["ShortDescription"] != "")
                         {
-                            requests.Add(reader["ShortDescription"].ToString());
+                            requests[$"val{counts}"]["txt"] = reader["ShortDescription"].ToString();
                         }
                         else
                         {
-                            requests.Add(reader["Message"].ToString());
+                            requests[$"val{counts}"]["txt"] = reader["Message"].ToString();
 
                         }
 
+                        requests[$"val{counts}"]["Cases"] = JsonConvert.DeserializeObject <List<string>> (reader["Cases"].ToString());
+                        requests[$"val{counts}"]["Category"] = reader["Category"].ToString();
+
+                        if(requests[$"val{counts}"]["Category"] == "agressive")
+                        {
+                            negativesCount = negativesCount + 1;
+                        }
+                        else
+                        {
+                            normalCounts = normalCounts + 1;
+                        }
+
+                        counts = counts + 1;
                     }
 
+                    requests[$"negatives"] = new Dictionary<string, object>();
+                    requests[$"negatives"]["count"] = negativesCount;
+
+                    requests[$"normals"] = new Dictionary<string, object>();
+                    requests[$"normals"]["count"] = normalCounts;
+                   
                     reader.Close();
                     reader.Dispose();
                 }

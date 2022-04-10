@@ -1,57 +1,82 @@
-﻿@Model List<string>
+﻿@Model Dictionary<string, Dictionary<string, object>>
 
-    @{
-        ViewData["Title"] = "Панель управления";
-    }
+@{
+    ViewData["Title"] = "Панель управления";
+}
 
     <div id="chart"></div>
 
-    @section Scripts
+@section Scripts
 {
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-        <script type="text/javascript">// Load the Visualization API and the corechart package.
-            google.charts.load('current', { 'packages': ['corechart'] });
+    <script type="text/javascript">// Load the Visualization API and the corechart package.
+    google.charts.load('current', { 'packages': ['corechart'] });
 
-            // Set a callback to run when the Google Visualization API is loaded.
-            google.charts.setOnLoadCallback(drawChart);
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-            // Callback that creates and populates a data table,
-            // instantiates the pie chart, passes in the data and
-            // draws it.
-            function drawChart() {
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
 
-                // Create the data table.
-                var data = new google.visualization.DataTable();
-                data.addColumn('string', 'Topping');
-                data.addColumn('number', 'Slices');
-                data.addRows([
-                    [, 3],
-                    ['ВРАЧ/ОСКОРБЛЕНИЕ', 1],
-                    ['НЕГАТИВНЫЙ', 5],
-                    ['НЕЙТРАЛЬНЫЙ', 9],
-                ]);
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+    ['СКОРАЯ', 3],
+    ['ВРАЧ/ОСКОРБЛЕНИЕ', 1],
+    ['НЕГАТИВНЫЙ', @Model["negatives"]["count"]],
+    ['НЕЙТРАЛЬНЫЙ', @Model["normals"]["count"]],
+    ]);
 
-                // Set chart options
-                var options = {
-                    'title': 'Данные о популярных запросах | классификация',
-                    'width': 600,
-                    'height': 500
-                };
+    // Set chart options
+    var options = {
+    'title': 'Данные о популярных запросах | классификация',
+    'width': 600,
+    'height': 500
+    };
 
-                // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart'));
-                chart.draw(data, options);
-            }</script>
-    }
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart'));
+    chart.draw(data, options);
+    }</script>
+}
 
 
            <ul class="list-group">
 
-               @foreach (var info in Model)
-               {
-                   <li class="list-group-item">@Html.Raw(info)</li>
-               }
+@foreach (var info in Model)
+{
+    @if(!info.Value.ContainsKey("txt"))
+    {
+        continue;
+    }
+
+    <li class="list-group-item">
+    @Html.Raw(info.Value["txt"].ToString());
+
+
+    @if (info.Value["Category"] == "agressive")
+    {
+        <button type="button" class="btn btn-danger">Негативно</button>
+    }
+    else
+    {
+        <button type="button" class="btn btn-secondary">Обычный</button>
+    }
+
+
+
+    @foreach (string cas in info.Value["Cases"] as List<string>)
+    {
+        <span class="badge badge-primary badge-pill">@cas</span>
+    }
+
+    </li>
+}
 
 
            </ul>
