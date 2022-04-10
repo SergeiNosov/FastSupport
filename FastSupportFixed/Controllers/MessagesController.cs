@@ -32,13 +32,23 @@ namespace FastSupportFixed.Controllers
         [HttpGet, Route("[controller]/Message")]
         public IActionResult Message(string fm, string lm)
         {
-            if (fm != null || fm != "" && lm != null)
+            if (fm != null && fm != "" && lm != null && lm != "")
             {
                 return View(new Dictionary<string, int>() {
                      { lm , 1},
                     { fm,0 },
 
                 });
+            }
+
+            if(fm != null && fm != "")
+            {
+                return View(new Dictionary<string, int>() {
+                    
+                    { fm,0 },
+
+                });
+
             }
 
             return View(new Dictionary<string, int>()
@@ -51,6 +61,7 @@ namespace FastSupportFixed.Controllers
         [HttpGet, Route("[controller]/SendMessage")]
         public IActionResult SendMessage(string mail,string message)
         {
+            Console.WriteLine($"SEND MESSAGE");
             //Костыль на проверку вопроса.
 
             DataAnalyzer dataAnalyzer = new DataAnalyzer();
@@ -96,11 +107,12 @@ namespace FastSupportFixed.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
 
+                Console.WriteLine($"PRESEARCH");
 
                 if (semanticAnalyzeInfo.entities.Count == 0)
                 {
                     string searchValue = "";
-                    StringBuilder stringBuilder = new StringBuilder();
+                   
 
 
                     foreach (var s in semanticAnalyzeInfo.cases)
@@ -110,7 +122,7 @@ namespace FastSupportFixed.Controllers
 
                     Console.WriteLine($"SEARCH LINE: {searchValue}");
 
-                    searchValue = stringBuilder.ToString();
+             
 
                     cmd = new MySqlCommand($"SELECT * FROM UserRequests WHERE MATCH (Cases) AGAINST ('{searchValue}');", conn);
 
@@ -134,7 +146,7 @@ namespace FastSupportFixed.Controllers
                             {
                                 foreach(string childCase in casesLoaded)
                                 {
-                                    if(mCase.Equals(matchedCases))
+                                    if(mCase.Equals(childCase))
                                     {
                                         matchedCases = matchedCases + 1;
                                     }
@@ -151,6 +163,9 @@ namespace FastSupportFixed.Controllers
 
                                 if (reader["Answer"] != null)
                                 {
+
+                                    Console.WriteLine($"Answer: {reader["Answer"].ToString()}");
+
                                     fastMessage = reader["Answer"].ToString();
 
                                     var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
