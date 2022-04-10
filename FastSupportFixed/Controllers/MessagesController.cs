@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net;
 using FastSupportFixed.DataAnalysis;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace FastSupportFixed.Controllers
 {
@@ -27,38 +28,28 @@ namespace FastSupportFixed.Controllers
         }
 
 
- 
-        [HttpGet,Route("[controller]/Message")]
-        public IActionResult Message(string fm)
+
+        [HttpGet, Route("[controller]/Message")]
+        public IActionResult Message(string fm, string lm)
         {
-            if(fm == null || fm == "")
+            if (fm != null || fm != "" && lm != null)
             {
                 return View(new Dictionary<string, int>() {
+                     { lm , 1},
+                    { fm,0 },
 
-            });
+                });
             }
 
-            return View(new Dictionary<string, int>() {
-
-                { fm, 0}
+            return View(new Dictionary<string, int>()
+            {
             });
         }
 
 
-        public Dictionary<string, int> GetLastMessages(string userToken)
-        {
-            return new Dictionary<string, int>()
-            {
-                {"Hello!", 1},
-                {"Where are my money!!!", 1},
-                {"Stop! Wait please 5 minutes!", 0},
-                {"answer" , -1}
-            };
-        }
 
-
-        [HttpGet, Route("[controller]/Send")]
-        public IActionResult SendMessage(string message)
+        [HttpGet, Route("[controller]/SendMessage")]
+        public IActionResult SendMessage(string mail,string message)
         {
             //Костыль на проверку вопроса.
 
@@ -84,13 +75,13 @@ namespace FastSupportFixed.Controllers
             {
                 //Попросим пользователя болле конкретизировать своё обращение.
                 fastMessage = "Мы приняли вашу жалобу и рассмотрим её как можно скорее. Заранее приносим свои извинения.";
-                messageCategory = "report";
+                messageCategory = "agressive";
             }
 
             if(emotionValue == 0)
             {
                 fastMessage = "Спасибо за обращение! Мы как можно скорее ответим Вам!";
-                messageCategory = "question";
+                messageCategory = "normal";
             }
 
 
@@ -100,8 +91,89 @@ namespace FastSupportFixed.Controllers
 
             using (MySqlConnection conn = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
+
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand($"INSERT INTO `Chats` (`User`,`Messages`) VALUES ('freeToken','{message}')", conn);
+
+                MySqlCommand cmd = new MySqlCommand();
+
+
+                if (semanticAnalyzeInfo.entities.Count == 0)
+                {
+                    string searchValue = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+
+
+                    foreach (var s in semanticAnalyzeInfo.cases)
+                    {
+                        searchValue = searchValue + $"{s} ";
+                    }
+
+                    Console.WriteLine($"SEARCH LINE: {searchValue}");
+
+                    searchValue = stringBuilder.ToString();
+
+                    cmd = new MySqlCommand($"SELECT * FROM UserRequests WHERE MATCH (Cases) AGAINST ('{searchValue}');", conn);
+
+                    
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+
+                            List<string> casesLoaded = JsonConvert.DeserializeObject<List<string>>(reader["Cases"].ToString());
+
+                            int matchedCases = 0;
+                            int bigCountCases = casesLoaded.Count > semanticAnalyzeInfo.cases.Count ? casesLoaded.Count : semanticAnalyzeInfo.cases.Count;
+
+
+                            Console.WriteLine($"Success FIND BY Search Line: {casesLoaded.Count}");
+
+                            foreach (string mCase in semanticAnalyzeInfo.cases)
+                            {
+                                foreach(string childCase in casesLoaded)
+                                {
+                                    if(mCase.Equals(matchedCases))
+                                    {
+                                        matchedCases = matchedCases + 1;
+                                    }
+                                }
+                            }
+
+                           
+                            float percent = matchedCases / bigCountCases;
+
+                            Console.WriteLine($"Percent BY Search Line: {percent}");
+
+                            if (percent > 0.75f)
+                            {
+
+                                if (reader["Answer"] != null)
+                                {
+                                    fastMessage = reader["Answer"].ToString();
+
+                                    var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+
+                                    return new RedirectResult(url: $"/Messages/Message?fm={messageUnicode2}", permanent: true,
+                                              preserveMethod: true);
+                                }
+                            }
+
+                        }
+
+
+
+
+
+
+                        reader.Close();
+                        reader.Dispose();
+                    }
+                }
+
+
+                cmd = new MySqlCommand($"INSERT INTO `Chats` (`User`,`Messages`) VALUES ('freeToken','{message}')", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -138,7 +210,10 @@ namespace FastSupportFixed.Controllers
 
 
             var messageUnicode = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
-            string urlOrigin = $"/Messages/Message?fm={messageUnicode}";
+            var lmUnicode = String.Join("/", message.Split("/").Select(s => WebUtility.UrlEncode(s)));
+
+
+            string urlOrigin = $"/Messages/Message?fm={messageUnicode}&lm={lmUnicode}";
             //var urlEncode = String.Join("/", urlOrigin.Split("/").Select(s => WebUtility.UrlEncode(s)));
 
             return new RedirectResult(url: urlOrigin, permanent: true,

@@ -3,11 +3,11 @@
 @model Dictionary<string, int>
 
 @{
-    ViewData["Title"] = "Диалог";
+    ViewData["Title"] = "Обращение";
 
     if(Model.Count == 0)
     {
-        Model["Здравствуйте, напишите нам своё обращение сюда или на почту support>gmail.com"] = 0;
+        Model["Здравствуйте, напишите нам своё обращение сюда или на почту support@gmail.com"] = 0;
     }
 }
 
@@ -23,12 +23,13 @@
 
 
             @foreach (var message in Model)
-            {
+            {/*
                 @if (message.Value == 1)
                 {
-                    <div class="d-flex flex-row p-3">
-                        <div class="bg-white mr-2 p-3"><span class="text-muted">@Html.DisplayName(message.Key)</span></div>
-                        <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="40" height="40">
+                    <div class="d-flex flex-row p-2">
+
+                    <div class="chat ml-2 p-3">@Html.Raw(message.Key)</div>
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="40" height="40">
                     </div>
                 }
                 else
@@ -36,25 +37,40 @@
 
                     <div class="d-flex flex-row p-2">
                         <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="40" height="40">
-                        <div class="chat ml-2 p-3">@Html.DisplayName(message.Key)</div>
+                        <div class="chat ml-2 p-3">@Html.Raw(message.Key)</div>
                     </div>
 
+                }*/
+
+            <div class="d-flex flex-row p-2">
+                @if (message.Value == 0)
+                {
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="40" height="40">
                 }
-
-
+                else
+                {
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="40" height="40">
+                }
+                <div class="chat ml-2 p-3">@Html.Raw(message.Key)</div>
+            </div>
             }
 
 
-
-            <div class="form-group px-3"> <textarea class="form-control" rows="3" placeholder="Type your message"></textarea> </div>
-
+           
 
 
+            <form action="/Messages/SendMessage" method="get">
 
-            <button type="button" onclick="location.href='@Url.Action("SendMessage?", "Messages")'" class="btn btn-success">Отправить</button>
+                <div class="form-group px-3"> <textarea type="text" name="mail" class="form-control" rows="3" placeholder="Ваша почта (ivan@example.com)"></textarea> </div>
+                <div class="form-group px-3"> <textarea type="text" name="message" class="form-control" rows="3" placeholder="Введите сюда своё обращение"></textarea> </div>
 
 
 
+
+                <button type="submit" class="btn btn-success">Отправить</button>
+
+
+            </form>
         </div>
 
 
