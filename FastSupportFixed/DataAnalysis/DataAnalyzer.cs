@@ -27,12 +27,12 @@ namespace FastSupportFixed.DataAnalysis
                     //if (e is Pullenti.Ner.Keyword.KeywordReferent)
                     //  Console.WriteLine(e);
 
-                    if (e is Pullenti.Ner.Keyword.KeywordReferent)
+                    if (e is Pullenti.Ner.Keyword.KeywordReferent b && b.Typ == Pullenti.Ner.Keyword.KeywordType.Predicate)
                     {
                         keywordsAnalizeInfo.keywords.Add(e.ToString());
                     }
 
-                    if(e is Pullenti.Ner.Keyword.KeywordReferent b && b.Typ == Pullenti.Ner.Keyword.KeywordType.Annotation)
+                    if(e is Pullenti.Ner.Keyword.KeywordReferent z && z.Typ == Pullenti.Ner.Keyword.KeywordType.Annotation)
                     {
                         keywordsAnalizeInfo.shortDescription = e.ToString();
                     }
@@ -55,18 +55,60 @@ namespace FastSupportFixed.DataAnalysis
             return keywordsAnalizeInfo;
         }
 
-        internal void GetShortDescription(string text)
+
+
+
+        internal void SemanticAnalyze(string txt)
         {
+            Pullenti.Ner.AnalysisResult are = Pullenti.Ner.ProcessorService.EmptyProcessor.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);
+            // Console.Write("Noun groups: ");
 
-        }
+            List<string> dataCases = new List<string>();
+            List<EntityWord> entities = new List<EntityWord>();
 
-        internal void DetectMainCategory()
-        {
+            // перебираем токены
+            for (Pullenti.Ner.Token t = are.FirstToken; t != null; t = t.Next)
+            {
+                // выделяем именную группу с текущего токена
+                Pullenti.Ner.Core.NounPhraseToken npt = Pullenti.Ner.Core.NounPhraseHelper.TryParse(t, Pullenti.Ner.Core.NounPhraseParseAttr.No, 0, null);
+                // не получилось
+                if (npt == null)
+                    continue;
+                // получилось, выводим в нормализованном виде
+                //Console.Write("[{0}=>{1}] ", npt.GetSourceText(), npt.GetNormalCaseText(null, Pullenti.Morph.MorphNumber.Singular, Pullenti.Morph.MorphGender.Undefined, false));
 
-        }
+                dataCases.Add(npt.GetNormalCaseText(null, Pullenti.Morph.MorphNumber.Singular, Pullenti.Morph.MorphGender.Undefined, false));
 
-        internal void DetectSubCategory()
-        {
+                // указатель на последний токен именной группы
+                t = npt.EndToken;
+            }
+
+            using (Pullenti.Ner.Processor proc = Pullenti.Ner.ProcessorService.CreateProcessor())
+            {
+                // анализируем текст
+                Pullenti.Ner.AnalysisResult ar = proc.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);
+                // результирующие сущности
+               // Console.WriteLine("\r\n==========================================\r\nEntities: ");
+                foreach (Pullenti.Ner.Referent e in ar.Entities)
+                {
+                    Console.WriteLine("{0}: {1}", e.TypeName, e.ToString());
+
+
+                    entities.Add(new EntityWord()
+                    {
+                        type = e.TypeName,
+                        val = e.ToString()
+
+                    });
+
+                    foreach (Pullenti.Ner.Slot s in e.Slots)
+                    {
+                       // Console.WriteLine("   {0}: {1}", s.TypeName, s.Value);
+
+                    }
+                }
+               
+            }
 
         }
 
@@ -108,4 +150,17 @@ internal class KeywordsAnalizeInfo
 {
     public string shortDescription = string.Empty;
     public List<string> keywords = new List<string>();
+}
+
+internal class SemanticAnalyzeInfo
+{
+    public List<string> cases = new List<string>(); 
+    public List<EntityWord> entities = new List<EntityWord>();
+}
+
+
+internal class EntityWord
+{
+    public string type = string.Empty;
+    public string val = string.Empty;
 }

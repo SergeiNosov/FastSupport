@@ -29,7 +29,7 @@ namespace FastSupportFixed
             }
 
 
-            string txt = "Всем врачам привет. Мы идём на стройку, что бы строить дом в городе Сочи под открытым небом, где летают птицы";
+            string txt = "Жалоба на больницу в городе Сочи, не работает";
 
             using (Pullenti.Ner.Processor proc = Pullenti.Ner.ProcessorService.CreateSpecificProcessor(Pullenti.Ner.Keyword.KeywordAnalyzer.ANALYZER_NAME))
             {
@@ -73,6 +73,56 @@ namespace FastSupportFixed
             Console.WriteLine($"\n\nPredicted Col1: {predictionResult.PredictedLabel}\n\n");
             Console.WriteLine("=============== End of process, hit any key to finish ===============");
 
+
+
+            Pullenti.Ner.AnalysisResult are = Pullenti.Ner.ProcessorService.EmptyProcessor.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);
+            Console.Write("Noun groups: ");
+
+            // перебираем токены
+            for (Pullenti.Ner.Token t = are.FirstToken; t != null; t = t.Next)
+            {
+                // выделяем именную группу с текущего токена
+                Pullenti.Ner.Core.NounPhraseToken npt = Pullenti.Ner.Core.NounPhraseHelper.TryParse(t, Pullenti.Ner.Core.NounPhraseParseAttr.No, 0, null);
+                // не получилось
+                if (npt == null)
+                    continue;
+                // получилось, выводим в нормализованном виде
+                Console.Write("[{0}=>{1}] ", npt.GetSourceText(), npt.GetNormalCaseText(null, Pullenti.Morph.MorphNumber.Singular, Pullenti.Morph.MorphGender.Undefined, false));
+                // указатель на последний токен именной группы
+                t = npt.EndToken;
+            }
+
+            using (Pullenti.Ner.Processor proc = Pullenti.Ner.ProcessorService.CreateProcessor())
+            {
+                // анализируем текст
+                Pullenti.Ner.AnalysisResult ar = proc.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);
+                // результирующие сущности
+                Console.WriteLine("\r\n==========================================\r\nEntities: ");
+                foreach (Pullenti.Ner.Referent e in ar.Entities)
+                {
+                    Console.WriteLine("{0}: {1}", e.TypeName, e.ToString());
+                    foreach (Pullenti.Ner.Slot s in e.Slots)
+                    {
+                        Console.WriteLine("   {0}: {1}", s.TypeName, s.Value);
+                    }
+                }
+                // пример выделения именных групп
+                Console.WriteLine("\r\n==========================================\r\nNoun groups: ");
+                for (Pullenti.Ner.Token t = ar.FirstToken; t != null; t = t.Next)
+                {
+                    // токены с сущностями игнорируем
+                    if (t.GetReferent() != null)
+                        continue;
+                    // пробуем создать именную группу
+                    Pullenti.Ner.Core.NounPhraseToken npt = Pullenti.Ner.Core.NounPhraseHelper.TryParse(t, Pullenti.Ner.Core.NounPhraseParseAttr.AdjectiveCanBeLast, 0, null);
+                    // не получилось
+                    if (npt == null)
+                        continue;
+                    Console.WriteLine(npt);
+                    // указатель перемещаем на последний токен группы
+                    t = npt.EndToken;
+                }
+            }
 
 
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");

@@ -27,11 +27,14 @@ namespace FastSupportFixed.Controllers
         }
 
 
-
-        [Route("[controller]/Message")]
-        public IActionResult Message()
+ 
+        [HttpGet,Route("[controller]/Message")]
+        public IActionResult Message(string fm)
         {
-            return View(GetLastMessages("testToken"));
+            return View(new Dictionary<string, int>() {
+
+                { fm, 0}
+            });
         }
 
 
