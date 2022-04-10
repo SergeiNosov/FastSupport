@@ -61,6 +61,17 @@ namespace FastSupportFixed.Controllers
         [HttpGet, Route("[controller]/SendMessage")]
         public IActionResult SendMessage(string mail,string message)
         {
+            string fastMessage = "none";
+
+            if (mail == null || mail == "" || message == null || message == "")
+            {
+                fastMessage = "Не корректное обращение, попробуйте снова.";
+                var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+
+                return new RedirectResult(url: $"/Messages/Message?fm={messageUnicode2}", permanent: true,
+                          preserveMethod: true);
+            }
+
             Console.WriteLine($"SEND MESSAGE");
             //Костыль на проверку вопроса.
 
@@ -70,7 +81,7 @@ namespace FastSupportFixed.Controllers
 
             int emotionValue = dataAnalyzer.GetEmotionMessage(message);
 
-            string fastMessage = "none";
+            fastMessage = "Пожалуйста отправьте жалобу заново!";
 
             if (emotionValue == 3 && !message.Contains("?"))
             {
@@ -130,6 +141,8 @@ namespace FastSupportFixed.Controllers
 
                     using (var reader = cmd.ExecuteReader())
                     {
+                        float bestPercent = 0f;
+                        string bestAnswer = "";
 
                         while (reader.Read())
                         {
@@ -158,27 +171,39 @@ namespace FastSupportFixed.Controllers
 
                             Console.WriteLine($"Percent BY Search Line: {percent}");
 
-                            if (percent > 0.75f)
+                            if (percent > 0.49f)
                             {
 
-                                if (reader["Answer"] != null)
+                                if (percent > bestPercent)
                                 {
+                                    
 
-                                    Console.WriteLine($"Answer: {reader["Answer"].ToString()}");
 
-                                    fastMessage = reader["Answer"].ToString();
+                                    if (reader["Answer"] != null)
+                                    {
 
-                                    var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+                                        bestPercent = percent;
+                                        bestAnswer = reader["Answer"].ToString();
 
-                                    return new RedirectResult(url: $"/Messages/Message?fm={messageUnicode2}", permanent: true,
-                                              preserveMethod: true);
+                 
+                                    }
                                 }
                             }
 
                         }
 
 
+                        if(bestAnswer != "")
+                        {
+                            Console.WriteLine($"Answer: {bestAnswer.ToString()}");
 
+                            fastMessage = bestAnswer.ToString();
+
+                            var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+
+                            return new RedirectResult(url: $"/Messages/Message?fm={messageUnicode2}", permanent: true,
+                                      preserveMethod: true);
+                        }
 
 
 
@@ -188,7 +213,7 @@ namespace FastSupportFixed.Controllers
                 }
 
 
-                cmd = new MySqlCommand($"INSERT INTO `Chats` (`User`,`Messages`) VALUES ('freeToken','{message}')", conn);
+                cmd = new MySqlCommand($"INSERT INTO `Chats` (`User`,`Messages`) VALUES ('{mail}','{message}')", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -224,7 +249,7 @@ namespace FastSupportFixed.Controllers
             }
 
 
-            var messageUnicode = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+            var messageUnicode = fastMessage != "" ? string.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s))) : "";
             var lmUnicode = String.Join("/", message.Split("/").Select(s => WebUtility.UrlEncode(s)));
 
 
