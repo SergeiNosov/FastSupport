@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/Controllers/MessagesController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/CSS/messages.css">
     <Files>
-      <File FileName="FastSupportFixed/Views/Home/AdminPanel.cshtml" Line="31" Column="18" />
-      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="32" Column="48" />
-      <File FileName="FastSupportFixed/Controllers/MessagesController.cs" Line="1" Column="1" />
+      <File FileName="FastSupportFixed/Views/Home/AdminPanel.cshtml" Line="25" Column="27" />
+      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="77" Column="22" />
+      <File FileName="FastSupportFixed/Controllers/MessagesController.cs" Line="50" Column="20" />
+      <File FileName="FastSupportFixed/CSS/messages.css" Line="1" Column="1" />
+      <File FileName="FastSupportFixed/Views/Messages/Message.cshtml" Line="3" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,15 +13,16 @@
           <Node name="FastSupportFixed" expanded="True">
             <Node name="Demo.Net" expanded="True" />
             <Node name="FastSupportFixed" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="HomeController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="CSS" expanded="True">
+                <Node name="messages.css" selected="True" />
               </Node>
-              <Node name="CSS" expanded="True" />
               <Node name="DataAnalysis" expanded="True" />
               <Node name="DataModels" expanded="True" />
               <Node name="StaticData" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
+                <Node name="Messages" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True" />

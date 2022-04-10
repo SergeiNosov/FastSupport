@@ -228,6 +228,21 @@ namespace FastSupportFixed.Controllers
                 }
 
 
+               //* cmd = new MySqlCommand($"SELECT * `RatingsCategory` (`Category`,`Messages`) VALUES ('{mail}','{message}')", conn);
+
+             //   using (var reader = cmd.ExecuteReader())
+               // {
+                    /*
+                    while (reader.Read())
+                    {
+                    }*/
+
+
+                 //   reader.Close();
+                 //   reader.Dispose();
+               //  }
+                //*
+
 
                 cmd = new MySqlCommand($"INSERT INTO `UserRequests` (`Message`,`Keywords`, `Category`,`SubCategory`, `ShortDescription`, `Entities`, `Cases`) VALUES ('{message}','{JsonConvert.SerializeObject(keywordsAnalizeInfo.keywords)}','{messageCategory}','subCategory','{keywordsAnalizeInfo.shortDescription}', '{JsonConvert.SerializeObject(semanticAnalyzeInfo.entities)}', '{JsonConvert.SerializeObject(semanticAnalyzeInfo.cases)}')", conn);
 

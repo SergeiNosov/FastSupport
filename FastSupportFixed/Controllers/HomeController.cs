@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using FastSupportFixed.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using MySqlConnector;
 
 namespace FastSupportFixed.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private IConfiguration _configuration;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
+            _configuration = configuration;
 
             _logger = logger;
         }
@@ -29,10 +29,49 @@ namespace FastSupportFixed.Controllers
             return View();
         }
 
-       
+
         public IActionResult AdminPanel()
         {
-            return View();
+            //Костыль.
+
+            Dictionary<string, int> popularedCases = new Dictionary<string, int>();
+            List<string> requests = new List<string>();
+
+            using (MySqlConnection conn = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM UserRequests", conn);
+
+                
+
+                using (var reader = cmd.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+
+                        if (reader["ShortDescription"] != null && reader["ShortDescription"] != "")
+                        {
+                            requests.Add(reader["ShortDescription"].ToString());
+                        }
+                        else
+                        {
+                            requests.Add(reader["Message"].ToString());
+
+                        }
+
+                    }
+
+                    reader.Close();
+                    reader.Dispose();
+                }
+            }
+
+
+         
+            return View(requests);
         }
 
 
