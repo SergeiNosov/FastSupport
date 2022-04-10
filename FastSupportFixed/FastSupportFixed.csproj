@@ -14,11 +14,13 @@
     <None Remove="Pullenti.Server" />
     <None Remove="Microsoft.ML" />
     <None Remove="DataModels\" />
+    <None Remove="Microsoft.AspNet.WebHelpers" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
     <PackageReference Include="MySqlConnector" Version="2.1.8" />
     <PackageReference Include="Microsoft.ML" Version="1.7.1" />
+    <PackageReference Include="Microsoft.AspNet.WebHelpers" Version="3.2.7" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CSS\" />

@@ -58,3 +58,13 @@
 /Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/runtimes/osx-x64/native/libLdaNative.dylib
 /Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/runtimes/win-x64/native/LdaNative.dll
 /Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/runtimes/win-x86/native/LdaNative.dll
+/Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Home/AdminPanel.cshtml.g.cs
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/System.Web.Razor.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/Microsoft.Web.Helpers.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/System.Web.Helpers.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/System.Web.WebPages.Deployment.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/System.Web.WebPages.Razor.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/System.Web.WebPages.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/WebMatrix.Data.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/WebMatrix.WebData.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/Microsoft.Web.Infrastructure.dll

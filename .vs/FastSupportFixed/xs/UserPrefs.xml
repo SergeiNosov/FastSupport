@@ -1,23 +1,9 @@
 ﻿<Properties StartupConfiguration="{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/Views/Shared/_Layout.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FastSupportFixed/Controllers/MessagesController.cs">
     <Files>
-      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="21" Column="1" />
-      <File FileName="FastSupportFixed/Views/Home/Index.cshtml" Line="1" Column="1" />
-      <File FileName="FastSupportFixed/Program.cs" Line="93" Column="14" />
-      <File FileName="FastSupportFixed/Startup.cs" Line="12" Column="27" />
-      <File FileName="FastSupportFixed/Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="FastSupportFixed/appsettings.json" />
-      <File FileName="FastSupportFixed/Views/Messages/Message.cshtml" Line="15" Column="7" />
-      <File FileName="FastSupportFixed/Controllers/MessagesController.cs" Line="57" Column="10" />
-      <File FileName="FastSupportFixed/CSS/messages.css" />
-      <File FileName="../Downloads/PullentiCSharp 2/Demo/Program.cs" Line="11" Column="15" />
-      <File FileName="../Library/Caches/VisualStudio/8.0/Symbols/mysql-net/MySqlConnector/d1507f03a01f6642fbcf5f03e1723e56813cec51/src/MySqlConnector/MySqlConnection.cs" />
-      <File FileName="FastSupportFixed/DataAnalysis/DataAnalyzer.cs" Line="112" Column="16" />
-      <File FileName="FastSupportFixed/StaticData/StaticData.cs" Line="1" Column="1" />
-      <File FileName="../Downloads/PullentiCSharp/Pullenti/Sdk.cs" />
-      <File FileName="../MlServer/Server2/sentiment labelled sentences/SentimentModel/Program.cs" Line="13" Column="23" />
-      <File FileName="FastSupportFixed/DataModels/SentimentModel.cs" Line="96" Column="144" />
-      <File FileName="FastSupportFixed/Views/Shared/_Layout.cshtml" Line="6" Column="38" />
+      <File FileName="FastSupportFixed/Views/Home/AdminPanel.cshtml" Line="31" Column="18" />
+      <File FileName="FastSupportFixed/Controllers/HomeController.cs" Line="32" Column="48" />
+      <File FileName="FastSupportFixed/Controllers/MessagesController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,17 +11,18 @@
           <Node name="FastSupportFixed" expanded="True">
             <Node name="Demo.Net" expanded="True" />
             <Node name="FastSupportFixed" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="HomeController.cs" selected="True" />
+              </Node>
+              <Node name="CSS" expanded="True" />
               <Node name="DataAnalysis" expanded="True" />
               <Node name="DataModels" expanded="True" />
               <Node name="StaticData" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
-                <Node name="Messages" expanded="True" />
-                <Node name="Shared" expanded="True">
-                  <Node name="_Layout.cshtml" selected="True" />
-                </Node>
+                <Node name="Shared" expanded="True" />
               </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
