@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.810.21
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastSupportFixed", "FastSupportFixed\FastSupportFixed.csproj", "{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pullenti.Net", "..\Downloads\PullentiCSharp\Pullenti\Pullenti.Net.csproj", "{1BB3B4DC-A838-45DC-B924-5BADF7D64465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.Net", "..\Downloads\PullentiCSharp 2\Demo\Demo.Net.csproj", "{622B263F-628D-4854-A61B-7832F4AE895A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52DE3EF0-7094-4612-8FA3-5D4554D48FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB3B4DC-A838-45DC-B924-5BADF7D64465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{622B263F-628D-4854-A61B-7832F4AE895A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622B263F-628D-4854-A61B-7832F4AE895A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622B263F-628D-4854-A61B-7832F4AE895A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622B263F-628D-4854-A61B-7832F4AE895A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

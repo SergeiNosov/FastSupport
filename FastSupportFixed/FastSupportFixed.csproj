@@ -11,6 +11,7 @@
     <None Remove="MySqlConnector" />
     <None Remove="DataAnalysis\" />
     <None Remove="StaticData\" />
+    <None Remove="Pullenti.Server" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
@@ -21,5 +22,10 @@
     <Folder Include="Views\Messages\" />
     <Folder Include="DataAnalysis\" />
     <Folder Include="StaticData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Pullenti.Server">
+      <HintPath>..\..\Downloads\PullentiServer\Pullenti.Server.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

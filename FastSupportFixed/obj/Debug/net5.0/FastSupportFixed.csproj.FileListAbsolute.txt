@@ -38,3 +38,4 @@
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/FastSupportFixed.csproj.CopyComplete
 /Users/user/FastSupport/FastSupportFixed/obj/Debug/net5.0/Razor/Views/Messages/Message.cshtml.g.cs
 /Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/MySqlConnector.dll
+/Users/user/FastSupport/FastSupportFixed/bin/Debug/net5.0/Pullenti.Server.dll
