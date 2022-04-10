@@ -58,11 +58,13 @@ namespace FastSupportFixed.DataAnalysis
 
 
 
-        internal void SemanticAnalyze(string txt)
+        internal SemanticAnalyzeInfo SemanticAnalyze(string txt)
         {
             Pullenti.Ner.AnalysisResult are = Pullenti.Ner.ProcessorService.EmptyProcessor.Process(new Pullenti.Ner.SourceOfAnalysis(txt), null, null);
             // Console.Write("Noun groups: ");
 
+
+            SemanticAnalyzeInfo semanticAnalyzeInfo = new SemanticAnalyzeInfo();
             List<string> dataCases = new List<string>();
             List<EntityWord> entities = new List<EntityWord>();
 
@@ -109,6 +111,11 @@ namespace FastSupportFixed.DataAnalysis
                 }
                
             }
+
+            semanticAnalyzeInfo.entities = entities;
+            semanticAnalyzeInfo.cases = dataCases;
+
+            return semanticAnalyzeInfo;
 
         }
 

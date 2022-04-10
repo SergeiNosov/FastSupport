@@ -31,6 +31,13 @@ namespace FastSupportFixed.Controllers
         [HttpGet,Route("[controller]/Message")]
         public IActionResult Message(string fm)
         {
+            if(fm == null || fm == "")
+            {
+                return View(new Dictionary<string, int>() {
+
+            });
+            }
+
             return View(new Dictionary<string, int>() {
 
                 { fm, 0}
@@ -61,32 +68,35 @@ namespace FastSupportFixed.Controllers
 
             int emotionValue = dataAnalyzer.GetEmotionMessage(message);
 
-            string fastMessage = "";
+            string fastMessage = "none";
 
             if (emotionValue == 3 && !message.Contains("?"))
             {
                 //Попросим пользователя болле конкретизировать своё обращение.
-                fastMessage = "Спасибо за обращение! Пожалуйста уточните детали в обращении";
+                fastMessage = "Спасибо за обращение! Пожалуйста уточните детали в обращении.";
+                var messageUnicode2 = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
 
-                return new RedirectResult(url: $"/Messages/Message?fm={fastMessage}", permanent: true,
+                return new RedirectResult(url: $"/Messages/Message?fm={messageUnicode2}", permanent: true,
                           preserveMethod: true);
             }
 
-            if (emotionValue == 0)
+            if (emotionValue == 1)
             {
                 //Попросим пользователя болле конкретизировать своё обращение.
                 fastMessage = "Мы приняли вашу жалобу и рассмотрим её как можно скорее. Заранее приносим свои извинения.";
                 messageCategory = "report";
             }
 
-            if(emotionValue == 1)
+            if(emotionValue == 0)
             {
-                fastMessage = "Спасибо за обращение! Мы как можно скорее ответим на ваше обращение!";
+                fastMessage = "Спасибо за обращение! Мы как можно скорее ответим Вам!";
                 messageCategory = "question";
             }
 
 
             KeywordsAnalizeInfo keywordsAnalizeInfo = dataAnalyzer.GetKeyWords(message);
+            SemanticAnalyzeInfo semanticAnalyzeInfo = dataAnalyzer.SemanticAnalyze(message);
+
 
             using (MySqlConnection conn = new MySqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
@@ -107,7 +117,7 @@ namespace FastSupportFixed.Controllers
 
 
 
-                cmd = new MySqlCommand($"INSERT INTO `UserRequests` (`Message`,`Keywords`, 'Category','SubCategory', 'ShortDescription') VALUES ('{message}','{JsonConvert.SerializeObject(keywordsAnalizeInfo.keywords)}','{messageCategory}','','','{keywordsAnalizeInfo.shortDescription}')", conn);
+                cmd = new MySqlCommand($"INSERT INTO `UserRequests` (`Message`,`Keywords`, `Category`,`SubCategory`, `ShortDescription`, `Entities`, `Cases`) VALUES ('{message}','{JsonConvert.SerializeObject(keywordsAnalizeInfo.keywords)}','{messageCategory}','subCategory','{keywordsAnalizeInfo.shortDescription}', '{JsonConvert.SerializeObject(semanticAnalyzeInfo.entities)}', '{JsonConvert.SerializeObject(semanticAnalyzeInfo.cases)}')", conn);
 
 
                 using (var reader = cmd.ExecuteReader())
@@ -126,7 +136,12 @@ namespace FastSupportFixed.Controllers
 
             }
 
-            return new RedirectResult(url: $"/Messages/Message?fm={fastMessage}", permanent: true,
+
+            var messageUnicode = String.Join("/", fastMessage.Split("/").Select(s => WebUtility.UrlEncode(s)));
+            string urlOrigin = $"/Messages/Message?fm={messageUnicode}";
+            //var urlEncode = String.Join("/", urlOrigin.Split("/").Select(s => WebUtility.UrlEncode(s)));
+
+            return new RedirectResult(url: urlOrigin, permanent: true,
                             preserveMethod: true);
         }
 
